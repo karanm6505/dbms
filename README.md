@@ -1,4 +1,4 @@
-``# Library Management System - Database Setup``
+# Library Management System - Database Setup
 
 ## Overview
 This database contains the full setup for a Library Management System. It is designed to manage books, staff, students, and borrowing records efficiently. The system includes:
