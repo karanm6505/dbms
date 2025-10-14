@@ -1,0 +1,10 @@
+# Node / Vite artifacts
+frontend/node_modules/
+frontend/dist/
+
+# Environment files
+server/.env
+frontend/.env
+
+# macOS
+.DS_Store

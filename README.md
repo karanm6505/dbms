@@ -17,8 +17,8 @@ This database contains the full setup for a Library Management System. It is des
 - `triggers.sql` – Contains all triggers with their business logic.  
 - `procedures.sql` – Contains stored procedures for common operations.  
 - `library_setup.sql` – Merged file containing all the above, ready to execute in one go.
-- `server/` – Go + Chi REST API for interacting with the database (under development).
-- `web/` – Vite-based frontend (to be scaffolded).
+- `server/` – Go + Chi REST API for interacting with the database.
+- `frontend/` – Vite + React dashboard that consumes the API.
 
 ---
 
@@ -39,3 +39,8 @@ You can execute the merged `.sql` file to create all tables, functions, triggers
 ```bash
 mysql -u your_username -p Library_Management_System < library_setup.sql
 ```
+
+## Application layers
+
+- **API**: `server/README.md` covers running the Go backend (port `5050`).
+- **Frontend**: `frontend/README.md` outlines the Vite React client (port `5173`). Ensure the backend is running before launching the frontend for live data.
