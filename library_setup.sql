@@ -2,22 +2,25 @@
 -- Library Management System Setup
 -- ================================
 
+CREATE DATABASE IF NOT EXISTS Library_Management_System;
+USE Library_Management_System;
+
 -- ================================
 -- 1. Tables and Sample Data
 -- ================================
-SOURCE /path/to/library_tables.sql;
+SOURCE ddl_dml.sql;
 
 -- ================================
 -- 2. Functions
 -- ================================
-SOURCE /path/to/library_functions.sql;
+SOURCE functions.sql;
 
 -- ================================
 -- 3. Triggers
 -- ================================
-SOURCE /path/to/library_triggers.sql;
+SOURCE triggers.sql;
 
 -- ================================
 -- 4. Stored Procedures
 -- ================================
-SOURCE /path/to/library_procedures.sql;
+SOURCE procedures.sql;

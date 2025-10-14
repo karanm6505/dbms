@@ -3,7 +3,6 @@
 --  Tables: student, staff, book, borrow, computer
 -- ===========================================
 
--- Drop existing tables if they exist (optional cleanup)
 DROP TABLE IF EXISTS borrow;
 DROP TABLE IF EXISTS computer;
 DROP TABLE IF EXISTS book;
@@ -68,6 +67,7 @@ INSERT INTO book (Book_ID, Title, Author, Publisher, Year_Published, Genre, Stat
 (1, 'Introduction to Algorithms', 'Thomas H. Cormen', 'MIT Press', 2022, 'Computer Science', 'Available'),
 (2, 'Database System Concepts', 'Abraham Silberschatz', 'McGraw Hill', 2020, 'Database Systems', 'Borrowed'),
 (3, 'Artificial Intelligence: A Modern Approach', 'Stuart Russell', 'Pearson', 2021, 'AI', 'Available'),
+(4, 'Clean Code', 'Robert C. Martin', 'Prentice Hall', 2018, 'Programming', 'Available'),
 (5, 'Operating System Concepts', 'Abraham Silberschatz', 'Wiley', 2022, 'Operating Systems', 'Issued'),
 (6, 'The Pragmatic Programmer', 'Andrew Hunt', 'Addison-Wesley', 2021, 'Programming', 'Available'),
 (7, 'Design Patterns', 'Erich Gamma', 'Addison-Wesley', 2020, 'Software Engineering', 'Borrowed'),
@@ -89,7 +89,7 @@ INSERT INTO book (Book_ID, Title, Author, Publisher, Year_Published, Genre, Stat
 (23, 'Effective Java', 'Joshua Bloch', 'Addison-Wesley', 2018, 'Programming', 'Borrowed'),
 (24, 'Computer Graphics: Principles and Practice', 'Foley et al.', 'Pearson', 2019, 'Graphics', 'Available'),
 (25, 'Introduction to Artificial Intelligence', 'Wolfgang Ertel', 'Springer', 2020, 'AI', 'Available'),
-(26, 'Database Systems', 'Korth', 'McGraw-Hill', 2020, 'Computer Science', 'available');
+(26, 'Database Systems', 'Korth', 'McGraw-Hill', 2020, 'Computer Science', 'Available');
 
 -- ===========================================
 -- 4. Computer Table
@@ -107,11 +107,11 @@ CREATE TABLE computer (
 );
 
 INSERT INTO computer (Computer_ID, Location, OS, Model, Status, Assigned_Student_ID, Assigned_Staff_ID) VALUES
-(1, 'Lab-A1', 'Windows 11', 'Dell Optiplex', 'In use', 1, 103),
-(2, 'Lab-A2', 'Ubuntu 22.04', 'HP EliteDesk', 'Working', NULL, 103),
-(3, 'Lab-B1', 'Windows 10', 'Lenovo ThinkCentre', 'Faulty', NULL, 103),
-(4, 'Lab-C1', 'Windows 11', 'Asus ExpertCenter', 'Working', 2, 102),
-(5, 'Lab-C2', 'Ubuntu 20.04', 'Acer Veriton', 'In use', 3, 103);
+(1, 'Lab-A1', 'Windows 11', 'Dell Optiplex', 'In use', 1, 3),
+(2, 'Lab-A2', 'Ubuntu 22.04', 'HP EliteDesk', 'Working', NULL, 3),
+(3, 'Lab-B1', 'Windows 10', 'Lenovo ThinkCentre', 'Faulty', NULL, 3),
+(4, 'Lab-C1', 'Windows 11', 'Asus ExpertCenter', 'Working', 2, 2),
+(5, 'Lab-C2', 'Ubuntu 20.04', 'Acer Veriton', 'In use', 3, 3);
 
 -- ===========================================
 -- 5. Borrow Table
@@ -130,13 +130,13 @@ CREATE TABLE borrow (
 );
 
 INSERT INTO borrow (Borrow_ID, Student_ID, Book_ID, Staff_ID, Issue_Date, Due_Date, Status) VALUES
-(1, 1, 2, 101, '2025-09-10', '2025-09-25', 'Returned'),
-(2, 3, 4, 104, '2025-09-15', '2025-09-30', 'Issued'),
-(3, 5, 9, 101, '2025-08-01', '2025-08-15', 'Returned'),
-(4, 2, 5, 102, '2025-09-28', '2025-10-10', 'Issued'),
-(5, 4, 14, 101, '2025-09-05', '2025-09-20', 'Returned'),
-(6, 1, 7, 105, '2025-09-12', '2025-09-27', 'Issued'),
-(7, 3, 12, 101, '2025-09-22', '2025-10-05', 'Issued'),
-(8, 5, 20, 104, '2025-09-25', '2025-10-10', 'Issued'),
-(9, 101, 1, 5, '2025-10-07', '2025-10-21', 'returned'),
+(1, 1, 2, 1, '2025-09-10', '2025-09-25', 'Returned'),
+(2, 3, 4, 4, '2025-09-15', '2025-09-30', 'Issued'),
+(3, 5, 9, 1, '2025-08-01', '2025-08-15', 'Returned'),
+(4, 2, 5, 2, '2025-09-28', '2025-10-10', 'Issued'),
+(5, 4, 14, 1, '2025-09-05', '2025-09-20', 'Returned'),
+(6, 1, 7, 5, '2025-09-12', '2025-09-27', 'Issued'),
+(7, 3, 12, 1, '2025-09-22', '2025-10-05', 'Issued'),
+(8, 5, 20, 4, '2025-09-25', '2025-10-10', 'Issued'),
+(9, 6, 1, 5, '2025-10-07', '2025-10-21', 'Returned'),
 (10, 3, 5, 1, '2025-10-07', '2025-10-21', 'Issued');

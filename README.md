@@ -17,6 +17,8 @@ This database contains the full setup for a Library Management System. It is des
 - `triggers.sql` – Contains all triggers with their business logic.  
 - `procedures.sql` – Contains stored procedures for common operations.  
 - `library_setup.sql` – Merged file containing all the above, ready to execute in one go.
+- `server/` – Go + Chi REST API for interacting with the database (under development).
+- `web/` – Vite-based frontend (to be scaffolded).
 
 ---
 
