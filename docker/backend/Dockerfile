@@ -1,10 +1,12 @@
 # syntax=docker/dockerfile:1.7
 
-FROM golang:1.22-alpine AS builder
+FROM golang:1.22-bookworm AS builder
 WORKDIR /app
 
 # Install build dependencies
-RUN apk add --no-cache git
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends git \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Copy go module files first to leverage layer caching
 COPY server/go.mod server/go.sum ./
