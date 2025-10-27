@@ -26,17 +26,23 @@ The server boots on the port defined in `API_PORT` (default `5050`). Health chec
 
 ### Available endpoints
 
-| Method | Path                   | Description                       |
-|--------|------------------------|-----------------------------------|
-| GET    | `/api/health`          | Service heartbeat check           |
-| GET    | `/api/students`        | List all students                 |
-| GET    | `/api/students/{id}`   | Fetch a single student by ID      |
-| POST   | `/api/students`        | Create a new student record       |
-| GET    | `/api/books`           | List all books                    |
-| GET    | `/api/books/available` | List books with status Available  |
-| GET    | `/api/staff`           | List all staff members            |
-| GET    | `/api/borrows`         | List borrow transactions          |
-| GET    | `/api/dashboard/stats` | Summary statistics for dashboard  |
+| Method | Path                                      | Description                               |
+|--------|-------------------------------------------|-------------------------------------------|
+| GET    | `/api/health`                             | Service heartbeat check                   |
+| GET    | `/api/students`                           | List all students                         |
+| GET    | `/api/students/{id}`                      | Fetch a single student by ID              |
+| POST   | `/api/students`                           | Create a new student record               |
+| GET    | `/api/books`                              | List all books                            |
+| GET    | `/api/books/available`                    | List books with status Available          |
+| GET    | `/api/staff`                              | List all staff members                    |
+| GET    | `/api/borrows`                            | List borrow transactions                  |
+| GET    | `/api/dashboard/stats`                    | Summary statistics for dashboard          |
+| GET    | `/api/schema/tables`                      | List tables in the active database        |
+| GET    | `/api/schema/functions`                   | List stored functions                     |
+| GET    | `/api/schema/procedures`                  | List stored procedures                    |
+| GET    | `/api/schema/triggers`                    | List database triggers                    |
+| POST   | `/api/schema/functions/{name}/execute`    | Execute a stored function with arguments  |
+| POST   | `/api/schema/procedures/{name}/execute`   | Execute a stored procedure with arguments |
 
 ## Project layout
 

@@ -1,8 +1,9 @@
-const DEFAULT_BASE_URL = "http://localhost:5050";
+const DEFAULT_BASE_URL = "";
 
 const getBaseUrl = () => {
-  if (import.meta.env.VITE_API_BASE_URL) {
-    return import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "");
+  const envValue = import.meta.env.VITE_API_BASE_URL;
+  if (typeof envValue === "string" && envValue.trim().length > 0) {
+    return envValue.trim().replace(/\/$/, "");
   }
 
   return DEFAULT_BASE_URL;

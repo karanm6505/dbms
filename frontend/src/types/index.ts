@@ -42,3 +42,28 @@ export interface DashboardSummary {
   borrowedBooks: number;
   totalStaff: number;
 }
+
+export interface SchemaTable {
+  name: string;
+}
+
+export interface DbRoutine {
+  name: string;
+}
+
+export interface DbTrigger {
+  name: string;
+  event: string;
+  table: string;
+  timing: string;
+}
+
+export interface ProcedureExecutionResult {
+  name: string;
+  rows: Record<string, unknown>[];
+}
+
+export interface FunctionExecutionResult {
+  name: string;
+  result: unknown;
+}

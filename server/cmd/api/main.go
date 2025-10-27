@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -36,12 +37,28 @@ func main() {
 	staffRepo := repository.NewStaffRepository(database)
 	borrowRepo := repository.NewBorrowRepository(database)
 	statsRepo := repository.NewStatsRepository(database)
+	metadataRepo := repository.NewMetadataRepository(database, cfg.Database.Name)
 
-	handler := handlers.New(database, studentRepo, bookRepo, staffRepo, borrowRepo, statsRepo)
+	handler := handlers.New(database, studentRepo, bookRepo, staffRepo, borrowRepo, statsRepo, metadataRepo)
+
+	allowedOrigins := []string{
+		"http://localhost:5173",
+		"http://127.0.0.1:5173",
+		"http://localhost:8080",
+		"http://127.0.0.1:8080",
+	}
+
+	if rawOrigins := os.Getenv("FRONTEND_ORIGINS"); rawOrigins != "" {
+		for _, origin := range strings.Split(rawOrigins, ",") {
+			if trimmed := strings.TrimSpace(origin); trimmed != "" {
+				allowedOrigins = append(allowedOrigins, trimmed)
+			}
+		}
+	}
 
 	router := chi.NewRouter()
 	router.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:5173", "http://127.0.0.1:5173"},
+		AllowedOrigins:   allowedOrigins,
 		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		AllowCredentials: true,
@@ -57,6 +74,12 @@ func main() {
 	router.Get("/api/staff", handler.GetStaff)
 	router.Get("/api/borrows", handler.GetBorrowRecords)
 	router.Get("/api/dashboard/stats", handler.GetDashboardStats)
+	router.Get("/api/schema/tables", handler.GetTables)
+	router.Get("/api/schema/functions", handler.GetFunctions)
+	router.Get("/api/schema/procedures", handler.GetProcedures)
+	router.Get("/api/schema/triggers", handler.GetTriggers)
+	router.Post("/api/schema/functions/{name}/execute", handler.ExecuteFunction)
+	router.Post("/api/schema/procedures/{name}/execute", handler.ExecuteProcedure)
 
 	server := &http.Server{
 		Addr:              fmt.Sprintf(":%d", cfg.API.Port),

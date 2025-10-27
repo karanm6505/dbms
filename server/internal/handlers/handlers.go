@@ -7,12 +7,13 @@ import (
 )
 
 type Handler struct {
-	DB          *sql.DB
-	StudentRepo *repository.StudentRepository
-	BookRepo    *repository.BookRepository
-	StaffRepo   *repository.StaffRepository
-	BorrowRepo  *repository.BorrowRepository
-	StatsRepo   *repository.StatsRepository
+	DB           *sql.DB
+	StudentRepo  *repository.StudentRepository
+	BookRepo     *repository.BookRepository
+	StaffRepo    *repository.StaffRepository
+	BorrowRepo   *repository.BorrowRepository
+	StatsRepo    *repository.StatsRepository
+	MetadataRepo *repository.MetadataRepository
 }
 
 func New(
@@ -22,13 +23,15 @@ func New(
 	staffRepo *repository.StaffRepository,
 	borrowRepo *repository.BorrowRepository,
 	statsRepo *repository.StatsRepository,
+	metadataRepo *repository.MetadataRepository,
 ) *Handler {
 	return &Handler{
-		DB:          db,
-		StudentRepo: studentRepo,
-		BookRepo:    bookRepo,
-		StaffRepo:   staffRepo,
-		BorrowRepo:  borrowRepo,
-		StatsRepo:   statsRepo,
+		DB:           db,
+		StudentRepo:  studentRepo,
+		BookRepo:     bookRepo,
+		StaffRepo:    staffRepo,
+		BorrowRepo:   borrowRepo,
+		StatsRepo:    statsRepo,
+		MetadataRepo: metadataRepo,
 	}
 }

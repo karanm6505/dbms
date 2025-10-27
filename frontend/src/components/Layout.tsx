@@ -6,6 +6,10 @@ const navItems = [
   { to: "/books", label: "Books" },
   { to: "/staff", label: "Staff" },
   { to: "/borrows", label: "Borrowing" },
+  { to: "/schema/functions", label: "Functions" },
+  { to: "/schema/procedures", label: "Procedures" },
+  { to: "/schema/triggers", label: "Triggers" },
+  { to: "/schema/reference", label: "Schema Manual" },
 ];
 
 export function Layout() {
