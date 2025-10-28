@@ -56,6 +56,10 @@ func (h *Handler) GetTriggers(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) ExecuteProcedure(w http.ResponseWriter, r *http.Request) {
+	if _, ok := h.requireAdmin(w, r); !ok {
+		return
+	}
+
 	name := chi.URLParam(r, "name")
 
 	req, err := decodeExecuteRequest(r)
@@ -81,6 +85,10 @@ func (h *Handler) ExecuteProcedure(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) ExecuteFunction(w http.ResponseWriter, r *http.Request) {
+	if _, ok := h.requireAdmin(w, r); !ok {
+		return
+	}
+
 	name := chi.URLParam(r, "name")
 
 	req, err := decodeExecuteRequest(r)

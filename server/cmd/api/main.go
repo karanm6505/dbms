@@ -38,8 +38,19 @@ func main() {
 	borrowRepo := repository.NewBorrowRepository(database)
 	statsRepo := repository.NewStatsRepository(database)
 	metadataRepo := repository.NewMetadataRepository(database, cfg.Database.Name)
+	userRepo := repository.NewUserRepository(database)
 
-	handler := handlers.New(database, studentRepo, bookRepo, staffRepo, borrowRepo, statsRepo, metadataRepo)
+	handler := handlers.New(
+		database,
+		studentRepo,
+		bookRepo,
+		staffRepo,
+		borrowRepo,
+		statsRepo,
+		metadataRepo,
+		userRepo,
+		cfg.Auth,
+	)
 
 	allowedOrigins := []string{
 		"http://localhost:5173",
@@ -66,20 +77,28 @@ func main() {
 	}))
 
 	router.Get("/api/health", handler.HealthCheck)
-	router.Get("/api/students", handler.GetStudents)
-	router.Get("/api/students/{id}", handler.GetStudentByID)
-	router.Post("/api/students", handler.CreateStudent)
-	router.Get("/api/books", handler.GetBooks)
-	router.Get("/api/books/available", handler.GetAvailableBooks)
-	router.Get("/api/staff", handler.GetStaff)
-	router.Get("/api/borrows", handler.GetBorrowRecords)
-	router.Get("/api/dashboard/stats", handler.GetDashboardStats)
-	router.Get("/api/schema/tables", handler.GetTables)
-	router.Get("/api/schema/functions", handler.GetFunctions)
-	router.Get("/api/schema/procedures", handler.GetProcedures)
-	router.Get("/api/schema/triggers", handler.GetTriggers)
-	router.Post("/api/schema/functions/{name}/execute", handler.ExecuteFunction)
-	router.Post("/api/schema/procedures/{name}/execute", handler.ExecuteProcedure)
+	router.Post("/api/auth/login", handler.Login)
+	router.Post("/api/auth/register", handler.Register)
+
+	router.Group(func(r chi.Router) {
+		r.Use(handler.AuthMiddleware)
+
+		r.Get("/api/auth/me", handler.Me)
+		r.Get("/api/students", handler.GetStudents)
+		r.Get("/api/students/{id}", handler.GetStudentByID)
+		r.Post("/api/students", handler.CreateStudent)
+		r.Get("/api/books", handler.GetBooks)
+		r.Get("/api/books/available", handler.GetAvailableBooks)
+		r.Get("/api/staff", handler.GetStaff)
+		r.Get("/api/borrows", handler.GetBorrowRecords)
+		r.Get("/api/dashboard/stats", handler.GetDashboardStats)
+		r.Get("/api/schema/tables", handler.GetTables)
+		r.Get("/api/schema/functions", handler.GetFunctions)
+		r.Get("/api/schema/procedures", handler.GetProcedures)
+		r.Get("/api/schema/triggers", handler.GetTriggers)
+		r.Post("/api/schema/functions/{name}/execute", handler.ExecuteFunction)
+		r.Post("/api/schema/procedures/{name}/execute", handler.ExecuteProcedure)
+	})
 
 	server := &http.Server{
 		Addr:              fmt.Sprintf(":%d", cfg.API.Port),

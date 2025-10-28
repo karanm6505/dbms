@@ -56,6 +56,10 @@ func (h *Handler) GetStudentByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) CreateStudent(w http.ResponseWriter, r *http.Request) {
+	if _, ok := h.requireAdmin(w, r); !ok {
+		return
+	}
+
 	var req createStudentRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, http.StatusBadRequest, "invalid JSON body")

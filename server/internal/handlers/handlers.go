@@ -3,6 +3,7 @@ package handlers
 import (
 	"database/sql"
 
+	"github.com/karanm6505/dbms/server/internal/config"
 	"github.com/karanm6505/dbms/server/internal/repository"
 )
 
@@ -14,6 +15,8 @@ type Handler struct {
 	BorrowRepo   *repository.BorrowRepository
 	StatsRepo    *repository.StatsRepository
 	MetadataRepo *repository.MetadataRepository
+	UserRepo     *repository.UserRepository
+	authConfig   config.AuthConfig
 }
 
 func New(
@@ -24,6 +27,8 @@ func New(
 	borrowRepo *repository.BorrowRepository,
 	statsRepo *repository.StatsRepository,
 	metadataRepo *repository.MetadataRepository,
+	userRepo *repository.UserRepository,
+	authCfg config.AuthConfig,
 ) *Handler {
 	return &Handler{
 		DB:           db,
@@ -33,5 +38,7 @@ func New(
 		BorrowRepo:   borrowRepo,
 		StatsRepo:    statsRepo,
 		MetadataRepo: metadataRepo,
+		UserRepo:     userRepo,
+		authConfig:   authCfg,
 	}
 }
