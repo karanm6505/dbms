@@ -8,6 +8,22 @@ DROP TABLE IF EXISTS computer;
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS staff;
 DROP TABLE IF EXISTS student;
+DROP TABLE IF EXISTS users;
+
+-- ===========================================
+-- 0. Users Table
+-- ===========================================
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'viewer') NOT NULL DEFAULT 'viewer',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (email, password_hash, role) VALUES
+('karanm6505@gmail.com', '$2a$10$K9sm5Sh5c6T852H9ohmmLu08px1fncihv.a6aOFYn3wKyhkCdnaeq', 'admin');
 
 -- ===========================================
 -- 1. Student Table

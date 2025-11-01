@@ -5,6 +5,7 @@ import { DbRoutine } from "../types";
 import { ErrorState } from "../components/ErrorState";
 import { LoadingIndicator } from "../components/LoadingIndicator";
 import { DataTable } from "../components/DataTable";
+import { useAuth } from "../hooks/useAuth";
 
 const columns = [{ key: "name", header: "Function name" }];
 
@@ -18,6 +19,7 @@ export function FunctionsPage() {
   const [executing, setExecuting] = useState(false);
   const [executionResult, setExecutionResult] = useState<string | null>(null);
   const [executionError, setExecutionError] = useState<string | null>(null);
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     const load = async () => {
@@ -43,6 +45,11 @@ export function FunctionsPage() {
     event.preventDefault();
     setExecutionError(null);
     setExecutionResult(null);
+
+    if (!isAdmin) {
+      setExecutionError("You need administrator access to execute stored functions.");
+      return;
+    }
 
     if (!selectedFunction) {
       setExecutionError("Choose a function to execute");

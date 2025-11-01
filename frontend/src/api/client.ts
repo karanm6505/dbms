@@ -9,13 +9,30 @@ const getBaseUrl = () => {
   return DEFAULT_BASE_URL;
 };
 
+let authTokenProvider: (() => string | null) | null = null;
+
+const buildHeaders = (init?: RequestInit) => {
+  const headers = new Headers({
+    "Content-Type": "application/json",
+  });
+
+  if (init?.headers) {
+    const provided = new Headers(init.headers);
+    provided.forEach((value, key) => headers.set(key, value));
+  }
+
+  const token = authTokenProvider?.();
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
+  return headers;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const baseUrl = getBaseUrl();
   const response = await fetch(`${baseUrl}${path}`, {
-    headers: {
-      "Content-Type": "application/json",
-      ...init?.headers,
-    },
+    headers: buildHeaders(init),
     ...init,
   });
 
@@ -32,6 +49,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const apiClient = {
   request,
+  setAuthTokenProvider(provider: (() => string | null) | null) {
+    authTokenProvider = provider;
+  },
   get<T>(path: string, init?: RequestInit) {
     return request<T>(path, { method: "GET", ...init });
   },

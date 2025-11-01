@@ -2,6 +2,7 @@ DELIMITER //
 
 -- Trigger: after_borrow_insert
 -- Updates the book status to 'Issued' when a new borrow record is inserted
+DROP TRIGGER IF EXISTS after_borrow_insert//
 CREATE TRIGGER after_borrow_insert
 AFTER INSERT ON borrow
 FOR EACH ROW
@@ -13,6 +14,7 @@ END//
 
 -- Trigger: after_borrow_return
 -- Updates the book status to 'Available' when a borrowed book is returned (status changes)
+DROP TRIGGER IF EXISTS after_borrow_return//
 CREATE TRIGGER after_borrow_return
 AFTER UPDATE ON borrow
 FOR EACH ROW
@@ -26,6 +28,7 @@ END//
 
 -- Trigger: after_book_insert
 -- Updates genre_count table whenever a new book is inserted
+DROP TRIGGER IF EXISTS after_book_insert//
 CREATE TRIGGER after_book_insert
 AFTER INSERT ON book
 FOR EACH ROW
@@ -37,6 +40,7 @@ END//
 
 -- Trigger: before_book_delete
 -- Prevents deletion of a book if it is currently issued or borrowed
+DROP TRIGGER IF EXISTS before_book_delete//
 CREATE TRIGGER before_book_delete
 BEFORE DELETE ON book
 FOR EACH ROW
@@ -49,6 +53,7 @@ END//
 
 -- Trigger: after_staff_insert
 -- Ensures new staff have 'Active' status if none provided
+DROP TRIGGER IF EXISTS after_staff_insert//
 CREATE TRIGGER after_staff_insert
 AFTER INSERT ON staff
 FOR EACH ROW
@@ -62,6 +67,7 @@ END//
 
 -- Trigger: before_borrow_limit
 -- Prevents a student from borrowing more than 3 books at a time
+DROP TRIGGER IF EXISTS before_borrow_limit//
 CREATE TRIGGER before_borrow_limit
 BEFORE INSERT ON borrow
 FOR EACH ROW

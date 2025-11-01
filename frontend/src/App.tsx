@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Layout } from "./components/Layout";
+import { RequireAuth } from "./components/RequireAuth";
 import { BorrowsPage } from "./pages/BorrowsPage";
 import { BooksPage } from "./pages/BooksPage";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -10,24 +11,30 @@ import { FunctionsPage } from "./pages/FunctionsPage";
 import { ProceduresPage } from "./pages/ProceduresPage";
 import { TriggersPage } from "./pages/TriggersPage";
 import { SchemaReferencePage } from "./pages/SchemaReferencePage";
+import { LoginPage } from "./pages/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage";
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<DashboardPage />} />
-        <Route path="students" element={<StudentsPage />} />
-        <Route path="books" element={<BooksPage />} />
-        <Route path="staff" element={<StaffPage />} />
-        <Route path="borrows" element={<BorrowsPage />} />
-        <Route path="schema">
-          <Route index element={<SchemaReferencePage />} />
-          <Route path="reference" element={<SchemaReferencePage />} />
-          <Route path="functions" element={<FunctionsPage />} />
-          <Route path="procedures" element={<ProceduresPage />} />
-          <Route path="triggers" element={<TriggersPage />} />
+  <Route path="/login" element={<LoginPage />} />
+  <Route path="/register" element={<RegisterPage />} />
+      <Route element={<RequireAuth />}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<DashboardPage />} />
+          <Route path="students" element={<StudentsPage />} />
+          <Route path="books" element={<BooksPage />} />
+          <Route path="staff" element={<StaffPage />} />
+          <Route path="borrows" element={<BorrowsPage />} />
+          <Route path="schema">
+            <Route index element={<SchemaReferencePage />} />
+            <Route path="reference" element={<SchemaReferencePage />} />
+            <Route path="functions" element={<FunctionsPage />} />
+            <Route path="procedures" element={<ProceduresPage />} />
+            <Route path="triggers" element={<TriggersPage />} />
+          </Route>
+          <Route path="*" element={<DashboardPage />} />
         </Route>
-        <Route path="*" element={<DashboardPage />} />
       </Route>
     </Routes>
   );

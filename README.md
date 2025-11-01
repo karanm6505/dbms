@@ -27,9 +27,16 @@ The Docker stack includes:
 ### 1. Database Setup
 
 ```bash
-# Create and populate the database
-mysql -u root -p < library_setup.sql
+# Reset schema, seed data, functions, triggers, procedures
+./scripts/reset_local_db.sh
+
+# Or specify custom credentials
+MYSQL_USER=root MYSQL_PASSWORD=secret ./scripts/reset_local_db.sh
 ```
+
+Default credentials:
+- **Admin** – `karanm6505@gmail.com` / `karanm2005`
+- Newly registered users receive the `viewer` role automatically.
 
 ### 2. Backend (Go API)
 

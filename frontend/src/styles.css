@@ -41,6 +41,14 @@ a {
   gap: 1.5rem;
 }
 
+.top-bar__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .brand {
   margin: 0;
   font-size: 1.5rem;
@@ -51,6 +59,51 @@ a {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-menu__meta {
+  display: grid;
+  gap: 0.15rem;
+  justify-items: end;
+}
+
+.user-menu__email {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.user-menu__role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: #1d4ed8;
+  background-color: rgba(37, 99, 235, 0.12);
+}
+
+.user-menu__role--viewer {
+  color: #0f766e;
+  background-color: rgba(13, 148, 136, 0.12);
+}
+
+.user-menu__logout {
+  background-color: transparent;
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  padding: 0.4rem 0.9rem;
+}
+
+.user-menu__logout:hover {
+  background-color: rgba(37, 99, 235, 0.08);
 }
 
 .nav-link {
@@ -98,6 +151,10 @@ a {
 
 .stack.gap-lg {
   gap: 1.75rem;
+}
+
+.stack.gap-md {
+  gap: 1rem;
 }
 
 .grid {
@@ -338,6 +395,63 @@ button:hover:not(:disabled) {
 button:disabled {
   background-color: #93c5fd;
   cursor: not-allowed;
+}
+
+.primary-button {
+  width: 100%;
+}
+
+.text-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.text-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top, rgba(37, 99, 235, 0.12), transparent 55%),
+    rgba(241, 245, 249, 0.9);
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  background-color: #ffffff;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  padding: 2.25rem;
+  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+  display: grid;
+  gap: 1.75rem;
+}
+
+.auth-header {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.auth-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.auth-footer {
+  display: grid;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.auth-card form button {
+  margin-top: 0.5rem;
 }
 
 .switch {

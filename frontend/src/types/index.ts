@@ -67,3 +67,11 @@ export interface FunctionExecutionResult {
   name: string;
   result: unknown;
 }
+
+export type UserRole = "admin" | "viewer";
+
+export interface AuthUser {
+  id: number;
+  email: string;
+  role: UserRole;
+}

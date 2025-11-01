@@ -3,6 +3,7 @@ DELIMITER //
 -- Procedure: add_new_book
 -- Adds a new book to the book table with status 'available'
 -- Parameters: p_title, p_author, p_publisher, p_year_published, p_genre
+DROP PROCEDURE IF EXISTS add_new_book//
 CREATE PROCEDURE add_new_book(
     IN p_title VARCHAR(255),
     IN p_author VARCHAR(255),
@@ -17,6 +18,7 @@ END//
 
 -- Procedure: get_active_staff_list
 -- Returns the list of active staff members
+DROP PROCEDURE IF EXISTS get_active_staff_list//
 CREATE PROCEDURE get_active_staff_list()
 BEGIN
     SELECT staff_id, first_name, last_name, position
@@ -27,6 +29,7 @@ END//
 -- Procedure: get_books_borrowed_by_student
 -- Returns all books borrowed by a specific student
 -- Parameter: studentId - ID of the student
+DROP PROCEDURE IF EXISTS get_books_borrowed_by_student//
 CREATE PROCEDURE get_books_borrowed_by_student(IN studentId INT)
 BEGIN
     SELECT 
@@ -48,6 +51,7 @@ END//
 -- Procedure: get_books_borrowed_with_overdue
 -- Returns borrowed books for a student along with overdue days
 -- Parameter: studentId - ID of the student
+DROP PROCEDURE IF EXISTS get_books_borrowed_with_overdue//
 CREATE PROCEDURE get_books_borrowed_with_overdue(IN studentId INT)
 BEGIN
     SELECT 
@@ -61,6 +65,7 @@ END//
 
 -- Procedure: get_currently_borrowed_books
 -- Returns all books that are currently issued
+DROP PROCEDURE IF EXISTS get_currently_borrowed_books//
 CREATE PROCEDURE get_currently_borrowed_books()
 BEGIN
     SELECT b.Book_ID, b.Title, b.Author, b.Genre,
@@ -72,6 +77,7 @@ END//
 
 -- Procedure: list_functions
 -- Lists all functions in the current database
+DROP PROCEDURE IF EXISTS list_functions//
 CREATE PROCEDURE list_functions()
 BEGIN
     SELECT ROUTINE_NAME
@@ -82,6 +88,7 @@ END//
 
 -- Procedure: list_procedures
 -- Lists all stored procedures in the current database
+DROP PROCEDURE IF EXISTS list_procedures//
 CREATE PROCEDURE list_procedures()
 BEGIN
     SELECT routine_name
@@ -92,6 +99,7 @@ END//
 
 -- Procedure: list_triggers
 -- Lists all triggers in the current database
+DROP PROCEDURE IF EXISTS list_triggers//
 CREATE PROCEDURE list_triggers()
 BEGIN
     SELECT TRIGGER_NAME, EVENT_MANIPULATION AS Event, EVENT_OBJECT_TABLE AS Table_Name, ACTION_TIMING AS Timing

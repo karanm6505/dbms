@@ -83,8 +83,8 @@ func main() {
 	router.Group(func(r chi.Router) {
 		r.Use(handler.AuthMiddleware)
 
-		r.Get("/api/auth/me", handler.Me)
-		r.Get("/api/students", handler.GetStudents)
+	r.Get("/api/auth/me", handler.Me)
+	r.Get("/api/students", handler.GetStudents)
 		r.Get("/api/students/{id}", handler.GetStudentByID)
 		r.Post("/api/students", handler.CreateStudent)
 		r.Get("/api/books", handler.GetBooks)
